@@ -1,1 +1,5 @@
 */*.html
+*/*.zip
+
+*/.scrapy/*
+*/__pycache__
