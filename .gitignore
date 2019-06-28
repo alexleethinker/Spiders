@@ -1,5 +1,7 @@
 */*.html
 */*.zip
 
-*/.scrapy/*
-*/__pycache__
+.scrapy/*
+__pycache__/*
+
+*.sqlite3
