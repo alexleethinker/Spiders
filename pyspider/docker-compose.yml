@@ -1,0 +1,44 @@
+phantomjs:
+  image: pyspider:my
+  command: phantomjs
+  restart: always
+result:
+  image: pyspider:my
+  external_links:
+    - mysql
+    - rabbitmq
+  command: result_worker
+  restart: always
+processor:
+  image: pyspider:my
+  external_links:
+    - mysql
+    - rabbitmq
+  command: processor
+  restart: always
+fetcher:
+  image: pyspider:my
+  external_links:
+    - rabbitmq
+  links:
+    - phantomjs
+  command : fetcher
+  restart: always
+scheduler:
+  image: pyspider:my
+  external_links:
+    - mysql
+    - rabbitmq
+  command: scheduler
+  restart: always
+webui:
+  image: pyspider:my
+  external_links:
+    - mysql
+    - rabbitmq
+  links:
+    - scheduler
+    - phantomjs
+  command: webui --need-auth --username alexleethinker --password lz8674168
+  ports:
+    - "5000:5000"
